@@ -71,6 +71,8 @@
     "watchPostEffect": "readonly",
     "watchSyncEffect": "readonly",
     "ContactView": "readonly",
-    "IconArrowRight": "readonly"
+    "IconArrowRight": "readonly",
+    "IconDashboard": "readonly",
+    "IconTransactions": "readonly"
   }
 }

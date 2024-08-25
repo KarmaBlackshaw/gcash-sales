@@ -8,6 +8,8 @@ declare global {
   const ContactView: typeof import('./src/views/ContactView.vue')['default']
   const EffectScope: typeof import('vue')['EffectScope']
   const IconArrowRight: typeof import('./src/components/icon/IconArrowRight.vue')['default']
+  const IconDashboard: typeof import('./src/components/icon/IconDashboard.vue')['default']
+  const IconTransactions: typeof import('./src/components/icon/IconTransactions.vue')['default']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']

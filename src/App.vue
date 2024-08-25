@@ -1,11 +1,70 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import IconGcash from '@/assets/image/gcash.png'
-import IconTitle from '@/assets/image/title.png'
+const router = useRouter()
+const route = useRoute()
+
+import IconDashboard from '@/components/icon/IconDashboard.vue'
+import IconTransactions from '@/components/icon/IconTransactions.vue'
+
+const navs = computed(() => {
+  return [
+    {
+      route: { name: 'dashboard' },
+      icon: IconDashboard,
+      title: 'Dashboard',
+      isActive: route.name === 'dashboard',
+    },
+    {
+      route: { name: 'transactions' },
+      icon: IconTransactions,
+      title: 'Transactions',
+      isActive: route.name === 'transactions',
+    },
+  ]
+})
 </script>
 
 <template>
-  <main class="flex justify-center bg-neutral-900 min-h-screen poppins-regular">
+  <div class="grid grid-cols-[300px_1fr] min-h-screen">
+    <div class="h-full p-4 border-r">
+      <nav class="w-full h-full">
+        <h4 class="mb-10">
+          <img
+            class="h-[70px]"
+            src="@/assets/image/gcash.png"
+            alt=""
+          >
+        </h4>
+
+        <ul class="h-full flex flex-col gap-1">
+          <li
+            v-for="(nav, navKey) in navs"
+            :key="navKey"
+            class="flex gap-2 items-center cursor-pointer transition py-3 rounded-lg px-2"
+            :class="[
+              nav.isActive ? 'bg-blue-500 text-white' : 'hover:bg-neutral-200/50',
+            ]"
+            @click="router.push(nav.route)"
+          >
+            <component
+              :is="nav.icon"
+              class="text-3xl"
+            />
+
+            {{ nav.title }}
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div>
+      <div class="h-[70px] border-b border-neutral-200"></div>
+
+      <div class="p-4">
+        <RouterView />
+      </div>
+    </div>
+  </div>
+  <!-- <main class="flex justify-center bg-neutral-900 min-h-screen poppins-regular">
     <div class="p-5 flex flex-col gap-4">
       <div class="flex">
         <img
@@ -36,7 +95,7 @@ import IconTitle from '@/assets/image/title.png'
         </button>
       </div>
     </div>
-  </main>
+  </main> -->
 </template>
 
 <style scoped>
