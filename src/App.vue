@@ -4,20 +4,30 @@ const route = useRoute()
 
 import IconDashboard from '@/components/icon/IconDashboard.vue'
 import IconTransactions from '@/components/icon/IconTransactions.vue'
+import IconSettings from '@/components/icon/IconSettings.vue'
 
 const navs = computed(() => {
   return [
     {
       route: { name: 'dashboard' },
       icon: IconDashboard,
+      iconClass: 'size-[25px]',
       title: 'Dashboard',
       isActive: route.name === 'dashboard',
     },
     {
       route: { name: 'transactions' },
       icon: IconTransactions,
+      iconClass: 'size-[25px]',
       title: 'Transactions',
       isActive: route.name === 'transactions',
+    },
+    {
+      route: { name: 'settings' },
+      icon: IconSettings,
+      iconClass: 'size-[20px]',
+      title: 'Settings',
+      isActive: route.name === 'settings',
     },
   ]
 })
@@ -27,13 +37,11 @@ const navs = computed(() => {
   <div class="grid grid-cols-[300px_1fr] min-h-screen">
     <div class="h-full p-4 border-r">
       <nav class="w-full h-full">
-        <h4 class="mb-10">
-          <img
-            class="h-[70px]"
-            src="@/assets/image/gcash.png"
-            alt=""
-          >
-        </h4>
+        <img
+          class="h-[70px] mb-10"
+          src="@/assets/image/gcash.png"
+          alt=""
+        >
 
         <ul class="h-full flex flex-col gap-1">
           <li
@@ -47,7 +55,8 @@ const navs = computed(() => {
           >
             <component
               :is="nav.icon"
-              class="text-3xl"
+              :class="nav.iconClass"
+              class="w-[50px] max-h-[25px]"
             />
 
             {{ nav.title }}

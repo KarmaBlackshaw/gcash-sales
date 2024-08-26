@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -17,7 +16,7 @@ export default defineConfig({
       extensions: ['vue'],
       collapseSamePrefixes: true,
       directoryAsNamespace: true,
-      dts: true
+      dts: true,
 
     }),
     AutoImport({
@@ -29,23 +28,30 @@ export default defineConfig({
       ],
       imports: [
         'vue',
-        'vue-router'
+        'pinia',
+        {
+          '@vueuse/core': [
+            'useAsyncState',
+            'onClickOutside',
+          ],
+        },
+        'vue-router',
       ],
       dirs: [
-        './src/**'
+        './src/**',
       ],
       dts: './auto-imports.d.ts',
       eslintrc: {
         enabled: true, // Default `false`
         // provide path ending with `.mjs` or `.cjs` to generate the file with the respective format
         filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
-        globalsPropValue: "readonly", // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+        globalsPropValue: 'readonly', // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
       },
-    })
+    }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
 })
