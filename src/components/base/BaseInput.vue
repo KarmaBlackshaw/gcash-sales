@@ -12,7 +12,7 @@ const props = defineProps({
 const attrs = useAttrs()
 
 const model = defineModel({
-  type: [String, Number, Date],
+  type: [String, Number, Date, Array],
   default: '',
 })
 
@@ -33,7 +33,14 @@ const preventE = event => {
       {{ label }}
     </span>
 
+    <VueDatePicker
+      v-if="type === 'date'"
+      v-model="model"
+      v-bind="attrs"
+    />
+
     <input
+      v-else
       v-model="model"
       v-bind="attrs"
       :type="type"

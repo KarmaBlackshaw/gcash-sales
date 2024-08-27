@@ -8,7 +8,11 @@ import router from './router'
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
-app.mount('#app')
+app
+  .use(createPinia())
+  .component('VueDatePicker', VueDatePicker)
+  .use(router)
+  .mount('#app')

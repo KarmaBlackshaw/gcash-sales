@@ -35,14 +35,16 @@ const navs = computed(() => {
 
 <template>
   <div class="h-full p-4 border-r">
-    <nav class="w-full h-full">
-      <img
-        class="h-[70px] mb-10"
-        src="@/assets/image/gcash.png"
-        alt=""
-      >
+    <nav class="w-full h-full flex flex-col">
+      <div>
+        <img
+          class="h-[70px] mb-10"
+          src="@/assets/image/gcash.png"
+          alt=""
+        >
+      </div>
 
-      <ul class="h-full flex flex-col gap-1">
+      <ul class="flex flex-col gap-1 flex-grow">
         <li
           v-for="(nav, navKey) in navs"
           :key="navKey"

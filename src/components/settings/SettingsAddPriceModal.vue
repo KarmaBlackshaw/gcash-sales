@@ -41,6 +41,10 @@ async function addPrice () {
   })
 
   isModalVisible.value = false
+
+  form.price = 0
+  form.from = 0
+  form.to = 0
 }
 </script>
 

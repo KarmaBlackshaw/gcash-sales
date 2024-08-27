@@ -87,6 +87,7 @@ addForm()
           class="w-full"
           label="Date"
           type="date"
+          :enable-time-picker="false"
         />
 
         <BaseInput

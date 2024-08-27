@@ -20,6 +20,15 @@ export const useTransactionStore = defineStore('transaction', () => {
   const transactions = computed(() => transactionsResponse.value?.list || [])
   const transactionsCount = computed(() => transactionsResponse.value?.total || 7)
 
+  const {
+    execute: fetchTransactionsDashboard,
+    isLoading: isFetchingTransactionsDashboard,
+    state: transactionsDashboard,
+  } = useAsyncAxios(
+    data => baseApi.post('/transactions/dashboard', data),
+    []
+  )
+
   return {
     storeTransaction,
     isStoringTransaction,
@@ -28,5 +37,9 @@ export const useTransactionStore = defineStore('transaction', () => {
     isFetchingTransactions,
     transactions,
     transactionsCount,
+
+    fetchTransactionsDashboard,
+    isFetchingTransactionsDashboard,
+    transactionsDashboard,
   }
 })

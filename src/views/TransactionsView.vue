@@ -1,8 +1,9 @@
 <script setup lang>
 const transactionStore = useTransactionStore()
+const router = useRouter()
+
 const { fetchTransactions } = transactionStore
 const { transactions } = storeToRefs(transactionStore)
-const router = useRouter()
 
 const headers = [
   {
@@ -37,14 +38,6 @@ fetchTransactions()
         @click="router.push({name: 'bulk-add-transactions'})"
       >
         Add Bulk Transactions
-      </BaseButton>
-
-      <BaseButton
-        color="blue"
-        size="md"
-        @click="isAddPriceModalVisible = true"
-      >
-        Add Transaction
       </BaseButton>
     </div>
 
