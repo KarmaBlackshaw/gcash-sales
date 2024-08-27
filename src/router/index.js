@@ -12,7 +12,18 @@ const router = createRouter({
     {
       path: '/transactions',
       name: 'transactions',
-      component: () => import('../views/TransactionsView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'transactions',
+          component: () => import('../views/TransactionsView.vue'),
+        },
+        {
+          path: 'bulk/add',
+          name: 'bulk-add-transactions',
+          component: () => import('../views/BulkAddTransactionsView.vue'),
+        },
+      ],
     },
     {
       path: '/settings',

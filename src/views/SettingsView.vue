@@ -96,36 +96,34 @@ lookupSetting({
       </BaseButton>
     </div>
 
-    <div class="overflow-x-auto rounded-lg border border-gray-200">
-      <BaseTable
-        :is-loading="isLookingUpSetting"
-        :headers="headers"
-        :items="prices"
-      >
-        <template #column:action="{item}">
-          <div class="flex gap-1">
-            <BaseButton
-              outline
-              size="sm"
-              color="stone"
-              text
-              @click="editPrice(item)"
-            >
-              Edit
-            </BaseButton>
+    <BaseTable
+      :is-loading="isLookingUpSetting"
+      :headers="headers"
+      :items="prices"
+    >
+      <template #column:action="{item}">
+        <div class="flex gap-1">
+          <BaseButton
+            outline
+            size="sm"
+            color="stone"
+            text
+            @click="editPrice(item)"
+          >
+            Edit
+          </BaseButton>
 
-            <BaseButton
-              outline
-              size="sm"
-              color="stone"
-              @click="deletePrice(item)"
-            >
-              Delete
-            </BaseButton>
-          </div>
-        </template>
-      </BaseTable>
-    </div>
+          <BaseButton
+            outline
+            size="sm"
+            color="stone"
+            @click="deletePrice(item)"
+          >
+            Delete
+          </BaseButton>
+        </div>
+      </template>
+    </BaseTable>
 
     <SettingsAddPriceModal v-model="isAddPriceModalVisible" />
 

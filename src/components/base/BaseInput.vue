@@ -9,8 +9,10 @@ const props = defineProps({
   },
 })
 
+const attrs = useAttrs()
+
 const model = defineModel({
-  type: [String, Number],
+  type: [String, Number, Date],
   default: '',
 })
 
@@ -33,8 +35,12 @@ const preventE = event => {
 
     <input
       v-model="model"
+      v-bind="attrs"
       :type="type"
       class="border rounded py-2 px-3 w-full !focus:ring-0 ring-0 outline-none text-sm"
+      :class="[
+        'disabled' in attrs ? 'cursor-not-allowed' : ''
+      ]"
       @keydown="preventE"
     >
   </label>

@@ -100,6 +100,12 @@
     "useAsyncAxios": "readonly",
     "trimPeso": "readonly",
     "prefixPeso": "readonly",
-    "useSwal": "readonly"
+    "useSwal": "readonly",
+    "IconAdd": "readonly",
+    "usePrice": "readonly",
+    "useTransactionsStore": "readonly",
+    "useTransactionStore": "readonly",
+    "IconSubtract": "readonly",
+    "IconChevronLeft": "readonly"
   }
 }

@@ -1,5 +1,27 @@
 <script setup lang>
+const transactionStore = useTransactionStore()
+const { fetchTransactions } = transactionStore
+const { transactions } = storeToRefs(transactionStore)
+const router = useRouter()
 
+const headers = [
+  {
+    label: 'Date',
+    key: 'date',
+  },
+  {
+    label: 'Amount',
+    key: 'amount',
+    resolver: item => prefixPeso(item.amount),
+  },
+  {
+    label: 'Fee',
+    key: 'fee',
+    resolver: item => prefixPeso(item.fee),
+  },
+]
+
+fetchTransactions()
 </script>
 
 <template>
@@ -8,73 +30,28 @@
       Transactions
     </h1>
 
-    <div class="overflow-x-auto rounded-lg border border-gray-200">
-      <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-        <thead class="text-left">
-          <tr>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Name
-            </th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Date of Birth
-            </th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Role
-            </th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Salary
-            </th>
-          </tr>
-        </thead>
+    <div class="mb-2 flex justify-end gap-2">
+      <BaseButton
+        color="blue"
+        size="md"
+        @click="router.push({name: 'bulk-add-transactions'})"
+      >
+        Add Bulk Transactions
+      </BaseButton>
 
-        <tbody class="divide-y divide-gray-200">
-          <tr>
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              John Doe
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              24/05/1995
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              Web Developer
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              $120,000
-            </td>
-          </tr>
-
-          <tr>
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Jane Doe
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              04/11/1980
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              Web Designer
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              $100,000
-            </td>
-          </tr>
-
-          <tr>
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              Gary Barlow
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              24/05/1995
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              Singer
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              $20,000
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <BaseButton
+        color="blue"
+        size="md"
+        @click="isAddPriceModalVisible = true"
+      >
+        Add Transaction
+      </BaseButton>
     </div>
+
+    <BaseTable
+      :headers="headers"
+      :items="transactions"
+    />
   </div>
 </template>
 

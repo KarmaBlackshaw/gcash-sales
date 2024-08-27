@@ -1,3 +1,3 @@
 export const prefixPeso = peso => {
-  return `₱${peso}`
+  return `₱${Number(peso).toLocaleString() }`
 }

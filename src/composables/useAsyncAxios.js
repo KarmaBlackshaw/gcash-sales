@@ -7,6 +7,7 @@ export default function useAsyncAxios (resolver, defaultValue) {
     try {
       isLoading.value = true
       const { data } = await resolver(payload)
+      console.log(data)
       state.value = data
       return data
     } catch (err) {
