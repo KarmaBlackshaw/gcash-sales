@@ -1,8 +1,9 @@
 <script setup lang>
 const transactionStore = useTransactionStore()
 const router = useRouter()
+const swal = useSwal()
 
-const { fetchTransactions } = transactionStore
+const { fetchTransactions, deleteTransaction } = transactionStore
 const { transactions } = storeToRefs(transactionStore)
 
 const headers = [
@@ -20,9 +21,30 @@ const headers = [
     key: 'fee',
     resolver: item => prefixPeso(item.fee),
   },
+  {
+    label: '',
+    key: 'action',
+  },
 ]
 
+async function onClickDeleteTransaction (transaction) {
+  const isConfirmed = await swal.confirm()
+
+  if (!isConfirmed) {
+    return
+  }
+
+  await deleteTransaction({
+    id: transaction.id,
+  })
+
+  fetchTransactions()
+
+  swal.alert({ type: 'success' })
+}
+
 fetchTransactions()
+
 </script>
 
 <template>
@@ -44,7 +66,18 @@ fetchTransactions()
     <BaseTable
       :headers="headers"
       :items="transactions"
-    />
+    >
+      <template #column:action="{item}">
+        <BaseButton
+          outline
+          size="sm"
+          color="stone"
+          @click="onClickDeleteTransaction(item)"
+        >
+          Delete
+        </BaseButton>
+      </template>
+    </BaseTable>
   </div>
 </template>
 

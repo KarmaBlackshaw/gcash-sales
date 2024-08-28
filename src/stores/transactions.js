@@ -9,6 +9,12 @@ export const useTransactionStore = defineStore('transaction', () => {
   )
 
   const {
+    execute: deleteTransaction,
+  } = useAsyncAxios(
+    data => baseApi.delete('/transactions', { data })
+  )
+
+  const {
     execute: fetchTransactions,
     isLoading: isFetchingTransactions,
     state: transactionsResponse,
@@ -32,6 +38,8 @@ export const useTransactionStore = defineStore('transaction', () => {
   return {
     storeTransaction,
     isStoringTransaction,
+
+    deleteTransaction,
 
     fetchTransactions,
     isFetchingTransactions,
