@@ -31,8 +31,8 @@ const prices = computed(() => {
   const priceList = Object.entries(setting.value.content)
     .map(([price, amountRange]) => {
       return {
-        price: `₱${price}`,
-        amountRange: amountRange.map(x => `₱${x}`).join(' - '),
+        price: prefixPeso(price),
+        amountRange: amountRange.map(x => prefixPeso(x)).join(' - '),
       }
     })
 
