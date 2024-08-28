@@ -10,12 +10,18 @@ export const useSettingStore = defineStore('settings', () => {
     []
   )
 
+  const lookedUpSetting = reactive({})
   const {
-    state: setting,
-    execute: lookupSetting,
+    execute: lookupSettingByName,
     isLoading: isLookingUpSetting,
   } = useAsyncAxios(
-    query => baseApi.post('/settings/find', query),
+    async name => {
+      const { data } = await baseApi.post('/settings/find', {
+        name,
+      })
+
+      lookedUpSetting[name] = data
+    },
     null
   )
 
@@ -32,8 +38,8 @@ export const useSettingStore = defineStore('settings', () => {
     fetchSettings,
     isFetchingSettings,
 
-    setting,
-    lookupSetting,
+    lookedUpSetting,
+    lookupSettingByName,
     isLookingUpSetting,
 
     updateSetting,

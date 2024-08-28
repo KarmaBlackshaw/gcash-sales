@@ -4,6 +4,10 @@ const transactionStore = useTransactionStore()
 const { fetchTransactionsDashboard } = transactionStore
 const { transactionsDashboard } = storeToRefs(transactionStore)
 
+const settingStore = useSettingStore()
+const { lookupSettingByName } = settingStore
+const { lookedUpSetting } = storeToRefs(settingStore)
+
 import { prefixPeso } from '@/utils/prefixPeso'
 
 const date = ref([])
@@ -20,6 +24,8 @@ watchEffect(() => {
     fetchTransactionsDashboard()
   }
 })
+
+lookupSettingByName('balance')
 </script>
 
 <template>
@@ -41,12 +47,12 @@ watchEffect(() => {
     <div class="grid grid-cols-3 gap-7">
       <div class="rounded-lg p-5 border border-neutral-200">
         <h3 class="text-xs text-neutral-400">
-          CAPITAL
+          Balance
         </h3>
 
         <div class="mt-5">
           <p class="text-2xl font-bold">
-            {{ prefixPeso(20000) }}
+            {{ prefixPeso(lookedUpSetting.balance?.content.amount || 0) }}
           </p>
         </div>
       </div>

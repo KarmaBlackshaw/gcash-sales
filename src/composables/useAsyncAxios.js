@@ -6,6 +6,8 @@ export default function useAsyncAxios (resolver, defaultValue) {
   async function execute (payload) {
     try {
       isLoading.value = true
+      error.value = null
+
       const { data } = await resolver(payload)
       state.value = data
       return data
@@ -20,5 +22,6 @@ export default function useAsyncAxios (resolver, defaultValue) {
     state: state,
     execute,
     isLoading,
+    error,
   }
 }

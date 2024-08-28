@@ -1,6 +1,7 @@
 <script setup lang>
 const transactionStore = useTransactionStore()
 const { storeTransaction } = transactionStore
+const { storeTransactionError } = storeToRefs(transactionStore)
 
 const { getPrice } = usePrice()
 const router = useRouter()
@@ -12,6 +13,7 @@ function addForm () {
     date: new Date().toISOString().split('T')[0],
     amount: 0,
     fee: 0,
+    type: 'cash-in',
   })
 }
 
@@ -39,9 +41,16 @@ async function save () {
         date: currentForm.date,
         amount: currentForm.amount,
         fee: currentForm.fee,
+        type: currentForm.type,
       })
     })
   )
+
+  if (storeTransactionError.value) {
+    return alert({
+      type: 'error',
+    })
+  }
 
   alert({
     type: 'success',
@@ -88,6 +97,22 @@ addForm()
           label="Date"
           type="date"
           :enable-time-picker="false"
+        />
+
+        <BaseSelect
+          v-model="currentForm.type"
+          class="w-full"
+          label="Type"
+          :items="[
+            {
+              text: 'Cash In',
+              value: 'cash-in',
+            },
+            {
+              text: 'Cash Out',
+              value: 'cash-out',
+            }
+          ]"
         />
 
         <BaseInput

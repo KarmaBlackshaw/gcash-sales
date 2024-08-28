@@ -21,6 +21,12 @@ const textClass = computed(() => {
       : 'text-white'
   }
 
+  if (props.color === 'red') {
+    return props.outline
+      ? 'text-red-600 hover:text-white active:text-white'
+      : 'text-white'
+  }
+
   return props.outline
     ? 'text-blue-600 hover:text-white active:text-white'
     : 'text-white'
@@ -31,6 +37,10 @@ const borderClass = computed(() => {
     return 'border border-stone-600'
   }
 
+  if (props.color === 'red') {
+    return 'border border-red-600'
+  }
+
   return 'border border-blue-600'
 })
 
@@ -39,6 +49,12 @@ const backgroundClass = computed(() => {
     return props.outline
       ? 'bg-transparent hover:bg-stone-700 active:bg-stone-600'
       : 'bg-stone-600 hover:bg-stone-700 active:bg-stone-600'
+  }
+
+  if (props.color === 'red') {
+    return props.outline
+      ? 'bg-transparent hover:bg-red-700 active:bg-red-600'
+      : 'bg-red-600 hover:bg-red-700 active:bg-red-600'
   }
 
   return props.outline

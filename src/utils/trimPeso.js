@@ -1,3 +1,3 @@
 export const trimPeso = peso => {
-  return Number(peso.replaceAll('₱', ''))
+  return Number(peso.replace(/[₱,\s]/gi, ''))
 }

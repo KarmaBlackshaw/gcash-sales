@@ -12,6 +12,7 @@ declare global {
   const IconChevronLeft: typeof import('./src/components/icon/IconChevronLeft.vue')['default']
   const IconClose: typeof import('./src/components/icon/IconClose.vue')['default']
   const IconDashboard: typeof import('./src/components/icon/IconDashboard.vue')['default']
+  const IconEmojiSad: typeof import('./src/components/icon/IconEmojiSad.vue')['default']
   const IconLoading: typeof import('./src/components/icon/IconLoading.vue')['default']
   const IconSettings: typeof import('./src/components/icon/IconSettings.vue')['default']
   const IconSubtract: typeof import('./src/components/icon/IconSubtract.vue')['default']

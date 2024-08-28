@@ -4,6 +4,7 @@ export const useTransactionStore = defineStore('transaction', () => {
   const {
     execute: storeTransaction,
     isLoading: isStoringTransaction,
+    error: storeTransactionError,
   } = useAsyncAxios(
     data => baseApi.post('/transactions', data)
   )
@@ -38,6 +39,7 @@ export const useTransactionStore = defineStore('transaction', () => {
   return {
     storeTransaction,
     isStoringTransaction,
+    storeTransactionError,
 
     deleteTransaction,
 

@@ -1,7 +1,7 @@
 <script setup lang>
 const settingStore = useSettingStore()
-const { updateSetting, fetchSettings, lookupSetting } = settingStore
-const { setting, isLookingUpSetting } = storeToRefs(settingStore)
+const { updateSetting, lookupSettingByName } = settingStore
+const { lookedUpSetting } = storeToRefs(settingStore)
 
 const isModalVisible = defineModel({
   type: Boolean,
@@ -13,6 +13,8 @@ const form = reactive({
   from: 0,
   to: 0,
 })
+
+const pricesSetting = computed(() => lookedUpSetting.value.prices)
 
 const errorMessages = ref('')
 async function addPrice () {
@@ -27,18 +29,16 @@ async function addPrice () {
   }
 
   const content = {
-    ...setting.value.content,
+    ...pricesSetting.value.content,
     [form.price]: [form.from, form.to],
   }
 
   await updateSetting({
-    id: setting.value.id,
+    id: pricesSetting.value.id,
     content: JSON.stringify(content),
   })
 
-  lookupSetting({
-    name: 'prices',
-  })
+  lookupSettingByName('prices')
 
   isModalVisible.value = false
 

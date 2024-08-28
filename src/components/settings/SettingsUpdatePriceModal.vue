@@ -1,6 +1,7 @@
 <script setup lang>
 const settingStore = useSettingStore()
-const { updateSetting, lookupSetting } = settingStore
+const { updateSetting, lookupSettingByName } = settingStore
+const { lookedUpSetting } = storeToRefs(settingStore)
 
 const isModalVisible = defineModel({
   type: Boolean,
@@ -20,14 +21,17 @@ const form = reactive({
   to: 0,
 })
 
+const pricesSetting = computed(() => lookedUpSetting.value.prices)
+
 watchEffect(() => {
   if (!props.setting) {
     return
   }
 
+  console.log(props.setting.amountRange.split('-'))
   const amountRange = props.setting.amountRange
     .split('-')
-    .map(x => Number(trimPeso(x).trim()))
+    .map(x => trimPeso(x))
 
   form.price = trimPeso(props.setting.price)
   form.from = amountRange[0]
@@ -47,18 +51,16 @@ async function updatePrice () {
   }
 
   const content = {
-    ...settingStore.setting.value.content,
+    ...pricesSetting.value.content,
     [form.price]: [form.from, form.to],
   }
 
   await updateSetting({
-    id: settingStore.setting.value.id,
+    id: pricesSetting.value.id,
     content: JSON.stringify(content),
   })
 
-  lookupSetting({
-    name: 'prices',
-  })
+  lookupSettingByName('prices')
 
   isModalVisible.value = false
 }

@@ -106,6 +106,7 @@
     "useTransactionsStore": "readonly",
     "useTransactionStore": "readonly",
     "IconSubtract": "readonly",
-    "IconChevronLeft": "readonly"
+    "IconChevronLeft": "readonly",
+    "IconEmojiSad": "readonly"
   }
 }

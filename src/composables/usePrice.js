@@ -1,7 +1,9 @@
 export default () => {
   const settingStore = useSettingStore()
-  const { lookupSetting } = settingStore
-  const { setting } = storeToRefs(settingStore)
+  const { lookupSettingByName } = settingStore
+  const { lookedUpSetting } = storeToRefs(settingStore)
+
+  const setting = computed(() => lookedUpSetting.value.prices)
 
   const getPrice = amount => {
     if (!setting.value) {
@@ -32,9 +34,7 @@ export default () => {
     }
   }
 
-  lookupSetting({
-    name: 'prices',
-  })
+  lookupSettingByName('prices')
 
   return {
     getPrice,
